@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import { LogIn } from 'lucide-react';
 
@@ -19,7 +19,7 @@ const Login = () => {
     setError('');
 
     try {
-      const loginRes = await axios.post('http://localhost:5000/api/users/login', {
+      const loginRes = await api.post('/users/login', {
         email,
         password,
       });

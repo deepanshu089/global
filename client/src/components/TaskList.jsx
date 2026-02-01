@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { Trash2, CheckCircle2, Clock, Circle, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -15,7 +15,7 @@ const TaskList = ({ tasks, setTasks, token }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+      await api.delete(`/tasks/${id}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       setTasks(tasks.filter(t => t._id !== id));
@@ -30,7 +30,7 @@ const TaskList = ({ tasks, setTasks, token }) => {
       : 'pending';
 
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, { status: nextStatus }, {
+      const res = await api.put(`/tasks/${id}`, { status: nextStatus }, {
          headers: { 'Authorization': `Bearer ${token}` }
       });
       setTasks(tasks.map(t => t._id === id ? res.data : t));

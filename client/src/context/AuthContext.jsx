@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 
 export const AuthContext = createContext();
 
@@ -20,12 +20,12 @@ export const AuthProvider = ({ children }) => {
       }
       
       try {
-        const tokenRes = await axios.post('http://localhost:5000/api/users/tokenIsValid', null, {
+        const tokenRes = await api.post('/users/tokenIsValid', null, {
           headers: { 'Authorization': `Bearer ${token}` }
         });
 
         if (tokenRes.data) {
-          const userRes = await axios.get('http://localhost:5000/api/users/', {
+          const userRes = await api.get('/users/', {
             headers: { 'Authorization': `Bearer ${token}` },
           });
           setUserData({

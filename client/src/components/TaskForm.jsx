@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Plus } from 'lucide-react';
-import axios from 'axios';
+import api from '../api/axios';
 import { motion } from 'framer-motion';
 
 const TaskForm = ({ onTaskAdded, token }) => {
@@ -14,7 +14,7 @@ const TaskForm = ({ onTaskAdded, token }) => {
 
     setIsLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/tasks', {
+      const res = await api.post('/tasks', {
         title,
         description,
         status: 'pending'

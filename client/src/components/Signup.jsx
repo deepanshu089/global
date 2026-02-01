@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import { UserPlus } from 'lucide-react';
 
@@ -27,7 +27,7 @@ const Signup = () => {
     }
 
     try {
-      const registerRes = await axios.post('http://localhost:5000/api/users/register', {
+      const registerRes = await api.post('/users/register', {
         username,
         email,
         password,

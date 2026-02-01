@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import api from './api/axios';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import Login from './components/Login';
@@ -20,7 +20,7 @@ function Dashboard() {
     if (!userData.token) return;
     
     try {
-      const res = await axios.get('http://localhost:5000/api/tasks', {
+      const res = await api.get('/tasks', {
         headers: { 'Authorization': `Bearer ${userData.token}` }
       });
       setTasks(res.data);
@@ -35,7 +35,7 @@ function Dashboard() {
 
   const addTask = async (taskData) => {
      try {
-      const res = await axios.post('http://localhost:5000/api/tasks', {
+      const res = await api.post('/tasks', {
         ...taskData,
         status: 'pending'
       }, {
